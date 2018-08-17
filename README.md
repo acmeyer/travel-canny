@@ -26,7 +26,7 @@ The actual management of the wireless network is handled by the app code and Twi
 
 ## How to use
 
-### TLDR;
+### TLDR
 
 <a href="https://heroku.com/deploy" target="_blank">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
