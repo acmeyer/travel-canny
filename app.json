@@ -6,36 +6,6 @@
     "DOMAIN_NAME": {
       "required": true
     },
-    "LANG": {
-      "required": true
-    },
-    "NEW_RELIC_LICENSE_KEY": {
-      "required": true
-    },
-    "NEW_RELIC_LOG": {
-      "required": true
-    },
-    "PAPERTRAIL_API_TOKEN": {
-      "required": true
-    },
-    "RACK_ENV": {
-      "required": true
-    },
-    "RAILS_ENV": {
-      "required": true
-    },
-    "RAILS_LOG_TO_STDOUT": {
-      "required": true
-    },
-    "RAILS_SERVE_STATIC_FILES": {
-      "required": true
-    },
-    "REDIS_PROVIDER": {
-      "required": true
-    },
-    "REDISCLOUD_URL": {
-      "required": true
-    },
     "SECRET_KEY_BASE": {
       "required": true
     },
@@ -44,6 +14,24 @@
     },
     "TWILIO_AUTH_TOKEN": {
       "required": true
+    },
+    "STRIPE_API_KEY": {
+      "required": true
+    },
+    "STRIPE_PUBLIC_KEY": {
+      "required": true
+    },
+    "SENDGRID_USERNAME": {
+      "required": true
+    },
+    "SENDGRID_API_KEY": {
+      "required": true
+    },
+    "MAILCHIMP_API_KEY": {
+      "required": false
+    },
+    "MAILCHIMP_MARKETING_LIST_ID": {
+      "required": false
     }
   },
   "formation": {
