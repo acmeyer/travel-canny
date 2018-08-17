@@ -1,0 +1,61 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    - if !@user.blank?
+      = link_to "Users", admin_users_path
+    - else
+      = link_to "Shipments", admin_shipments_path
+  %li.breadcrumb-item
+    - if !@user.blank?
+      = link_to @user.id, admin_user_path(@user)
+    - else
+      = link_to @shipment.id, admin_shipment_path(@shipment)
+  %li.breadcrumb-item.active Address Details
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 Address Details
+      .actions
+        - if !@user.blank?
+          = link_to 'Edit', edit_admin_user_address_path(@user, @address), class: 'btn btn-light'
+          = link_to 'Delete', admin_user_address_path(@user, @address), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+        - else
+          = link_to 'Edit', edit_admin_shipment_address_path(@shipment, @address), class: 'btn btn-light'
+          = link_to 'Delete', admin_shipment_address_path(@shipment, @address), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Street 1:
+      .col-sm-10
+        .text-left
+          #{@address.street_1}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Street 2:
+      .col-sm-10
+        .text-left
+          #{@address.street_2}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong City:
+      .col-sm-10
+        .text-left
+          #{@address.city} 
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong State:
+      .col-sm-10
+        .text-left
+          #{@address.state} 
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Postal Code:
+      .col-sm-10
+        .text-left
+          #{@address.postal_code}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Country:
+      .col-sm-10
+        .text-left
+          #{@address.country}                                       

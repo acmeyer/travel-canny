@@ -1,0 +1,21 @@
+.nav.nav-underline.nav-justified.mb-3
+  %div{class: "nav-item nav-link #{step == 'initial' ? 'active' : ''}"}
+    %i.fas.fa-clipboard
+    .d-none.d-md-block
+      Sign Up
+  %div{class: "nav-item nav-link #{step == 'shipping' ? 'active' : ''}"}
+    %i.fas.fa-truck
+    .d-none.d-md-block
+      Shipping
+  %div{class: "nav-item nav-link #{step == 'payment' ? 'active' : ''}"}
+    %i.fas.fa-credit-card
+    .d-none.d-md-block
+      Payment
+  %div{class: "nav-item nav-link #{step == 'trip' ? 'active' : ''}"}
+    %i.fas.fa-suitcase
+    .d-none.d-md-block
+      Trip
+  %div{class: "nav-item nav-link #{step == 'confirm' ? 'active' : ''}"}
+    %i.fas.fa-check
+    .d-none.d-md-block
+      Confirm

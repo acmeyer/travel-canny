@@ -1,0 +1,13 @@
+- if stripe_customer.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(stripe_customer.errors.count, "error")} prohibited this Stripe Customer from being saved:"
+    %ul
+      - stripe_customer.errors.full_messages.each do |message|
+        %li= message
+
+.form-group
+  = f.label :stripe_id, class: ''
+  = f.text_field :stripe_id, class: 'form-control'
+.form-group
+  = f.label :default_source, class: ''
+  = f.text_field :default_source, class: 'form-control'

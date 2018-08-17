@@ -1,0 +1,40 @@
+- if sim.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(sim.errors.count, "error")} prohibited this SIM from being saved:"
+    %ul
+      - sim.errors.full_messages.each do |message|
+        %li= message
+
+.form-group
+  = f.label :sid, class: ''
+  = f.text_field :sid, class: 'form-control'
+.form-group
+  = f.label :uuid, class: ''
+  = f.text_field :uuid, class: 'form-control'
+.form-group
+  = f.label :activation_code, class: ''
+  = f.text_field :activation_code, class: 'form-control'    
+.form-group
+  = f.label :rate_plan_sid, class: ''
+  = f.text_field :rate_plan_sid, class: 'form-control'  
+.form-group
+  = f.label :name, class: ''
+  = f.text_field :name, class: 'form-control'
+.form-group
+  = f.label :status, class: ''
+  = f.select :status, Sim.statuses.map { |key, value| [key.humanize, key] }, {}, {class: 'form-control'}
+.form-group
+  = f.label :iccid, class: ''
+  = f.text_field :iccid, class: 'form-control'  
+.form-group
+  = f.label :phone_number, class: ''
+  = f.text_field :phone_number, class: 'form-control'
+.form-group
+  = f.label :country_code, class: ''
+  = f.text_field :country_code, class: 'form-control'   
+.form-group
+  = f.label :user_id, class: ''
+  = f.collection_select(:user_id, User.all, :id, :name, {include_blank: "Select"}, {class: 'form-control'})
+.form-check
+  = f.check_box :test_sim, class: 'form-check-input'
+  = f.label :test_sim, class: 'form-check-label'   

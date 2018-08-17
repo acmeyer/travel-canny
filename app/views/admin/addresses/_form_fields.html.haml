@@ -1,0 +1,28 @@
+- if address && address.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(address.errors.count, "error")} prohibited this address from being saved:"
+    %ul
+      - address.errors.full_messages.each do |message|
+        %li= message
+
+.form-group
+  = f.label :street_1, class: ''
+  = f.text_field :street_1, class: 'form-control'
+.form-group
+  = f.label :street_2, class: ''
+  = f.text_field :street_2, class: 'form-control'   
+.form-group
+  = f.label :city, class: ''
+  = f.text_field :city, class: 'form-control'
+.form-group
+  = f.label :state, class: ''
+  = f.text_field :state, class: 'form-control'
+.form-group
+  = f.label :postal_code, class: ''
+  = f.text_field :postal_code, class: 'form-control'
+.form-group
+  = f.label :country, class: ''
+  = f.text_field :country, class: 'form-control' 
+.form-group
+  = f.label :country_code, class: ''
+  = f.text_field :country_code, class: 'form-control'                  

@@ -1,0 +1,35 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    - if !@user.blank?
+      = link_to "Users", admin_users_path
+    - else
+      = link_to "Shipments", admin_shipments_path
+  %li.breadcrumb-item
+    - if !@user.blank?
+      = link_to @user.id, admin_user_path(@user)
+    - else
+      = link_to @shipment.id, admin_shipment_path(@shipment)
+  %li.breadcrumb-item.active New Address
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 New Address
+
+    %hr
+    - if !@user.blank?
+      = form_for [:admin, @user, @address] do |f|
+        .row.justify-content-center
+          .col-sm-6
+            = render 'form_fields', f: f, address: @address
+            %hr
+            .actions
+              = f.submit 'Create', class: 'btn btn-primary btn-block', data: {disable_with: 'Creating...'}
+    - else
+      = form_for [:admin, @shipment, @address] do |f|
+        .row.justify-content-center
+          .col-sm-6
+            = render 'form_fields', f: f, address: @address
+            %hr
+            .actions
+              = f.submit 'Create', class: 'btn btn-primary btn-block', data: {disable_with: 'Creating...'}

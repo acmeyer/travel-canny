@@ -1,0 +1,99 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "SIMs", admin_sims_path
+  %li.breadcrumb-item.active SIM Details
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 SIM Details
+      .actions
+        = link_to 'Edit', edit_admin_sim_path(@sim), class: 'btn btn-light'
+        = link_to 'Delete', admin_sim_path(@sim), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong User:
+      .col-sm-10
+        .text-left
+          = link_to admin_user_path(@sim.user) do
+            #{@sim.user.name}  
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong SIM id:
+      .col-sm-10
+        .text-left
+          #{@sim.id}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong sid:
+      .col-sm-10
+        .text-left
+          #{@sim.sid}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong uuid:
+      .col-sm-10
+        .text-left
+          #{@sim.uuid}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong iccid:
+      .col-sm-10
+        .text-left
+          #{@sim.iccid}          
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Activation Code:
+      .col-sm-10
+        .text-left
+          #{@sim.activation_code}          
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Rate Plan sid:
+      .col-sm-10
+        .text-left
+          #{@sim.rate_plan_sid}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Name:
+      .col-sm-10
+        .text-left
+          #{@sim.name}                
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Phone Number:
+      .col-sm-10
+        .text-left
+          #{@sim.phone_number}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Country Code:
+      .col-sm-10
+        .text-left
+          #{@sim.country_code}          
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Status:
+      .col-sm-10
+        .text-left
+          #{@sim.status.humanize}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Test Sim:
+      .col-sm-10
+        .text-left
+          #{@sim.test_sim?}              
+    
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Shipment
+      .col-sm-10
+        - if !@sim.shipment.blank?
+          = link_to @sim.shipment.id, admin_shipment_path(@sim.shipment)
+        - else
+          None 
+          .mt-3.mb-3 
+            = link_to 'Add Shipment', new_admin_shipment_path(sim_id: @sim.id), class: 'btn btn-primary'                       
+                     

@@ -1,0 +1,22 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Users", admin_users_path
+  %li.breadcrumb-item
+    = link_to @user.id, admin_user_path(@user)
+  %li.breadcrumb-item.active Edit Stripe Customer
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 Editing Stripe Customer #{@stripe_customer.id}
+      .actions
+        = link_to 'Show', [:admin, @user], class: 'btn btn-light'
+
+    %hr
+    = form_for [:admin, @user, @stripe_customer] do |f|
+      .row.justify-content-center
+        .col-sm-6    
+          = render 'form_fields', f: f, stripe_customer: @stripe_customer
+          %hr
+          .actions
+            = f.submit 'Update', class: 'btn btn-primary btn-block', data: {disable_with: 'Updating...'}

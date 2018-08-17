@@ -1,0 +1,30 @@
+.card
+  .d-flex.p-3.justify-content-between.border.border-top-0.border-right-0.border-left-0
+    %h3.card-title Shipments
+    .actions
+      = link_to 'Create Shipmemt', new_admin_shipment_path, class: 'btn btn-primary'
+
+  .d-flex.justify-content-center.search.my-3
+    .col-md-6
+      = form_tag admin_shipments_path, method: :get do
+        = text_field_tag 'search_query', @search_query, class: 'form-control', placeholder: "Search..."
+
+  .table-responsive
+    %table.table.table-hover
+      %thead
+        %tr
+          %td ID
+          %td Tracking Number
+          %td Status
+          %td
+          %td
+      %tbody
+        - @shipments.each do |shipment|
+          %tr{"data-link" => url_for(action: 'show', id: shipment.id)}
+            %td.clickable= shipment.id
+            %td.clickable= shipment.tracking_number
+            %td.clickable= shipment.status.humanize
+            %td= link_to "Edit", edit_admin_shipment_path(shipment)
+            %td= link_to "Delete", admin_shipment_path(shipment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger'
+
+  = paginate @shipments, window: 1

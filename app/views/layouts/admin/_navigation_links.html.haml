@@ -1,0 +1,16 @@
+%li.nav-item{class: "#{current_page?(admin_users_path) ? 'active' : ''}"}
+  = link_to "Users", admin_users_path, class: 'nav-link'
+%li.nav-item{class: "#{current_page?(admin_shipments_path) ? 'active' : ''}"}
+  = link_to "Shipments", admin_shipments_path, class: 'nav-link'  
+%li.nav-item{class: "#{current_page?(admin_sims_path) ? 'active' : ''}"}
+  = link_to "SIMs", admin_sims_path, class: 'nav-link'
+%li.nav-item{class: "#{current_page?(admin_countries_path) ? 'active' : ''}"}
+  = link_to "Countries", admin_countries_path, class: 'nav-link'
+%li.nav-item
+  = link_to "Sidekiq", '/admin/sidekiq', class: 'nav-link', target: '_blank'
+%li.nav-item
+  = link_to "Stripe", "https://dashboard.stripe.com/dashboard", class: 'nav-link', target: "_blank"
+%li.nav-item
+  = link_to "Twilio", "https://www.twilio.com/console", class: 'nav-link', target: "_blank"  
+%li.nav-item
+  = link_to "Heroku", "https://dashboard.heroku.com/", class: 'nav-link', target: "_blank"

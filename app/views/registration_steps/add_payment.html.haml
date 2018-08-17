@@ -1,0 +1,14 @@
+.authform.mx-auto
+  = render 'registration_steps/registration_wizard_steps', step: 'payment'
+  .card
+    .card-body
+      = form_for @user, url: wizard_path, method: :put, html: {id: 'payment-form'} do |f|
+        %p.lead.text-center= t('views.registration.add_payment')
+        %p.text-center= t('views.registration.add_payment_details')
+        %hr
+        = form_error_messages(@user)
+        = render 'forms/stripe/payment_card'
+        = render 'forms/addresses/billing_address_form_fields'
+        = f.submit t('buttons.next'), :class => 'btn btn-primary btn-block', data: { disable_with: t('buttons.loading') }
+        %small.form-text.text-muted.text-center= t('views.registration.payment_confirmation_message')
+      

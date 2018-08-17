@@ -1,0 +1,209 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Users", admin_users_path
+  %li.breadcrumb-item.active User Details
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 User Details
+      .actions
+        = link_to 'Edit', edit_admin_user_path(@user), class: 'btn btn-light'
+        = link_to 'Delete', admin_user_path(@user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong User id:
+      .col-sm-10
+        .text-left
+          #{@user.id}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong First name:
+      .col-sm-10
+        .text-left
+          #{@user.first_name}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Last name:
+      .col-sm-10
+        .text-left
+          #{@user.last_name}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Email:
+      .col-sm-10
+        .text-left
+          #{@user.email}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Beta User:
+      .col-sm-10
+        .text-left
+          #{@user.beta_user}          
+
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Shipping Address
+      .col-sm-10
+        - if !@user.shipping_address.blank?
+          = @user.shipping_address.multi_line.join("\n")
+        - else
+          None
+          .mt-3.mb-3
+            = link_to 'Add Address', new_admin_user_address_path(user_id: @user.id), class: 'btn btn-primary' 
+
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Stripe Customer
+      .col-sm-10
+        - if !@user.stripe_customer.blank?
+          = link_to @user.name, admin_user_stripe_customer_path(@user, @user.stripe_customer)
+        - else
+          None
+          .mt-3.mb-3
+            = link_to 'Add Stripe Customer', new_admin_user_stripe_customer_path(user_id: @user.id), class: 'btn btn-primary'    
+
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Data Plan
+      .col-sm-10
+        .attribute
+          %strong Id:
+          = link_to @data_plan.id, admin_user_data_plan_path(@user, @data_plan)
+        .attribute
+          %strong Status:
+          #{@data_plan.status.humanize}            
+        .attribute
+          %strong Total Amount (mb):
+          #{@data_plan.total_amount_mb}
+        .attribute
+          %strong Total Amount Used (mb):
+          #{@data_plan.total_amount_used_mb}
+        .attribute
+          %strong Amount Remaining (mb):
+          #{@data_plan.amount_remaining_mb}           
+        .attribute
+          %strong Warning Amount (mb):
+          #{@data_plan.warning_amount_mb} 
+
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Data Usage
+      .col-sm-10
+        - if @data_usage_records.total_count > 0
+          .table-responsive
+            %table.table.table-hover.tours-table
+              %thead
+                %tr
+                  %td ID
+                  %td Start
+                  %td End
+                  %td Amount (MB)
+              %tbody
+                - @data_usage_records.each do |record|
+                  %tr
+                    %td= record.id
+                    %td= record.start
+                    %td= record.end
+                    %td= record.total_usage_mb
+          = paginate @data_usage_records, window: 1, param_name: :data_usage_records_page
+        - else
+          None                                                   
+
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong SIMs
+      .col-sm-10
+        - if @sims.total_count > 0
+          .table-responsive
+            %table.table.table-hover.tours-table
+              %thead
+                %tr
+                  %td ID
+                  %td uuid
+                  %td sid
+                  %td
+                  %td
+              %tbody
+                - @sims.each do |sim|
+                  %tr
+                    %td= link_to sim.id, admin_sim_path(sim)
+                    %td= sim.uuid
+                    %td= sim.sid
+                    %td= link_to "Edit", edit_admin_sim_path(sim)
+                    %td= link_to "Delete", admin_sim_path(sim), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger'
+          = paginate @sims, window: 1, param_name: :sims_page
+        - else
+          None 
+        .mt-3.mb-3 
+          = link_to 'Add SIM', new_admin_sim_path(user_id: @user.id), class: 'btn btn-primary'
+
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Trips
+      .col-sm-10
+        - if @trips.total_count > 0
+          .table-responsive
+            %table.table.table-hover.tours-table
+              %thead
+                %tr
+                  %td ID
+                  %td Country(s)
+                  %td
+                  %td
+              %tbody
+                - @trips.each do |trip|
+                  %tr
+                    %td= link_to trip.id, admin_user_trip_path(@user, trip)
+                    %td
+                      - if !trip.countries.blank?
+                        = trip.countries.pluck(:name).join(',')
+                      - else
+                        None
+                    %td= link_to "Edit", edit_admin_user_trip_path(@user, trip)
+                    %td= link_to "Delete", admin_user_trip_path(@user, trip), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger'
+          = paginate @trips, window: 1, param_name: :trips_page
+        - else
+          None 
+        .mt-3.mb-3 
+          = link_to 'Add Trip', new_admin_user_trip_path(user_id: @user.id), class: 'btn btn-primary'
+
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Auth Tokens
+      .col-sm-10
+        - if @auth_tokens.total_count > 0
+          .table-responsive
+            %table.table.table-hover.tours-table
+              %thead
+                %tr
+                  %td ID
+                  %td Last Used
+                  %td Expires
+                  %td IP Address
+                  %td User Agent
+                  %td
+                  %td
+              %tbody
+                - @auth_tokens.each do |auth_token|
+                  %tr
+                    %td= link_to auth_token.id, admin_user_auth_token_path(@user, auth_token)
+                    %td= auth_token.last_used_at
+                    %td= auth_token.expires_at
+                    %td= auth_token.ip_address.to_s
+                    %td= auth_token.user_agent
+                    %td
+                      - unless auth_token.expired?
+                        = link_to "Expire", expire_admin_user_auth_token_path(@user, auth_token), method: :post, data: { confirm: 'Are you sure?' }, class: 'text-danger'
+                    %td= link_to "Delete", admin_user_auth_token_path(@user, auth_token), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger'
+          = paginate @auth_tokens, window: 1, param_name: :auth_tokens_page
+        - else
+          None                              

@@ -1,0 +1,32 @@
+.card
+  .d-flex.p-3.justify-content-between.border.border-top-0.border-right-0.border-left-0
+    %h3.card-title SIMs
+    .actions
+      = link_to 'Create SIM', new_admin_sim_path, class: 'btn btn-primary'
+
+  .d-flex.justify-content-center.search.my-3
+    .col-md-6
+      = form_tag admin_sims_path, method: :get do
+        = text_field_tag 'search_query', @search_query, class: 'form-control', placeholder: "Search..."
+
+  .table-responsive
+    %table.table.table-hover
+      %thead
+        %tr
+          %td ID
+          %td sid
+          %td Phone number
+          %td Status
+          %td
+          %td
+      %tbody
+        - @sims.each do |sim|
+          %tr{"data-link" => url_for(action: 'show', id: sim.id)}
+            %td.clickable= sim.id
+            %td.clickable= sim.sid
+            %td.clickable= sim.phone_number
+            %td.clickable= sim.status.humanize
+            %td= link_to "Edit", edit_admin_sim_path(sim)
+            %td= link_to "Delete", admin_sim_path(sim), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger'
+
+  = paginate @sims, window: 1

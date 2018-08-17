@@ -1,0 +1,11 @@
+%nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
+  .container-fluid
+    = link_to '/admin', class: 'navbar-brand d-flex' do
+      Travel Canny Admin
+    %button.navbar-toggler{ type: 'button', data: {toggle: 'collapse', target: '#navbarNav'}}
+      %span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbarNav
+      %ul.navbar-nav.mr-auto
+        = render 'layouts/admin/navigation_links'
+      .navbar-nav.ml-auto
+        = link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-item nav-link"

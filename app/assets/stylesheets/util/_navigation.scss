@@ -1,0 +1,4 @@
+.nav-underline .nav-link.active, .nav-underline .show > .nav-link {
+  color: $primary;
+  border-bottom: 1px solid $primary;
+}

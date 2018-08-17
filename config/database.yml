@@ -1,0 +1,25 @@
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: travel_canny_development
+  pool:     5
+  template: template0
+
+test:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: travel_canny_test
+  pool:     5
+  template: template0
+
+production:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: travel_canny_production
+  pool:     5
+  username: travel_canny
+  password:
+  template: template0

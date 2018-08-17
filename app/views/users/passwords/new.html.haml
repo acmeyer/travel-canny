@@ -1,0 +1,13 @@
+.authform.card.mx-auto
+  .card-body
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f|
+      %h2.text-center= t('views.auth.titles.forgot_your_password')
+      %hr
+      %p.text-center= t('views.auth.reset_password_instructions')
+      = devise_error_messages!
+      .form-group
+        = f.email_field :email, :autofocus => true, class: 'form-control', placeholder: t('forms.email'), required: true
+      = f.submit t('views.auth.reset_password'), :class => 'btn btn-primary btn-block',  data: { disable_with: t('buttons.sending') }
+.mt-3.text-center
+  = render 'users/shared/extra_links', resource_name: resource_name, page: 'forgot password'
+

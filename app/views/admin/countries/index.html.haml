@@ -1,0 +1,30 @@
+.card
+  .d-flex.p-3.justify-content-between.border.border-top-0.border-right-0.border-left-0
+    %h3.card-title Countries
+    .actions
+      = link_to 'Create Country', new_admin_country_path, class: 'btn btn-primary'
+
+  .d-flex.justify-content-center.search.my-3
+    .col-md-6
+      = form_tag admin_countries_path, method: :get do
+        = text_field_tag 'search_query', @search_query, class: 'form-control', placeholder: "Search..."
+
+  .table-responsive
+    %table.table.table-hover
+      %thead
+        %tr
+          %td ID
+          %td Name
+          %td Country Code
+          %td
+          %td
+      %tbody
+        - @countries.each do |country|
+          %tr{"data-link" => url_for(action: 'show', id: country.id)}
+            %td.clickable= country.id
+            %td.clickable= country.name
+            %td.clickable= country.alpha_2_code
+            %td= link_to "Edit", edit_admin_country_path(country)
+            %td= link_to "Delete", admin_country_path(country), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger'
+
+  = paginate @countries, window: 1

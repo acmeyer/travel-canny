@@ -1,0 +1,76 @@
+= hidden_field_tag :stripe_token
+.form-group
+  #card.form-control
+  #card-errors.invalid-feedback
+
+- content_for :javascripts do
+  :javascript
+    var stripe = Stripe('#{STRIPE_PUBLIC_KEY}');
+    var elements = stripe.elements();
+    //var paymentRequestButton = elements.create('paymentRequestButton');
+
+    var style = {
+      base: {
+        fontSize: '16px',
+        lineHeight: '1.5',
+        fontFamily: 'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',
+        color: '#495057',
+      },
+    };
+
+    var classes = {
+      focus: 'focus',
+      empty: 'empty',
+      invalid: 'is-invalid',
+    };
+
+    var card = elements.create('card', {
+      style: style,
+      classes: classes,
+      hidePostalCode: true,
+    });
+    card.mount('#card');
+
+
+    function stripeTokenHandler(token) {
+      // Insert the token ID into the form so it gets submitted to the server
+      var form = document.getElementById('payment-form');
+      var hiddenInput = document.getElementById('stripe_token');
+      hiddenInput.setAttribute('value', token.id);
+
+      // Submit the form
+      form.submit();
+    }
+
+    function createToken() {
+      stripe.createToken(card).then(function(result) {
+        if (result.error) {
+          // Inform the user if there was an error
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+          // Reenable form submit
+          $('#payment-form input[type="submit"]').prop('disabled', false);
+          $('#payment-form input[type="submit"]').val("#{t('buttons.next')}");
+        } else {
+          // Send the token to your server
+          stripeTokenHandler(result.token);
+        }
+      });
+    };
+
+    card.addEventListener('change', function(event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+
+    // Create a token when the form is submitted.
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      createToken();
+    });
+    

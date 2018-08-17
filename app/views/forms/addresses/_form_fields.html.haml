@@ -1,0 +1,11 @@
+.form-group
+  = f.text_field :street_1, class: 'form-control', placeholder: t('forms.street'), required: true
+.form-group
+  = f.text_field :street_2, class: 'form-control', placeholder: t('forms.street_2')
+.form-row
+  .col-md-6.form-group
+    = f.text_field :city, class: 'form-control', placeholder: t('forms.city'), required: true
+  .col-md-3.form-group
+    = f.collection_select(:state, us_states, :first, :first, {include_blank: t('forms.state')}, {class: 'form-control', required: true}) 
+  .col-md-3.form-group
+    = f.text_field :postal_code, class: 'form-control', placeholder: t('forms.postal_code'), required: true

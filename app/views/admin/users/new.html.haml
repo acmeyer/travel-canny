@@ -1,0 +1,18 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Users", admin_users_path
+  %li.breadcrumb-item.active New User
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 New User
+
+    %hr
+    = form_for [:admin, @user] do |f|
+      .row.justify-content-center
+        .col-sm-6    
+          = render 'form_fields', f: f, user: @user
+          %hr
+          .actions
+            = f.submit 'Create', class: 'btn btn-primary btn-block', data: {disable_with: 'Creating...'}

@@ -1,0 +1,27 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Users", admin_users_path
+  %li.breadcrumb-item
+    = link_to @user.id, admin_user_path(@user)
+  %li.breadcrumb-item.active Stripe Customer Details
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 Stripe Customer Details
+      .actions    
+        = link_to 'Edit', edit_admin_user_stripe_customer_path(@user, @stripe_customer), class: 'btn btn-light'
+        = link_to 'Delete', admin_user_stripe_customer_path(@user, @stripe_customer), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Stripe Id:
+      .col-sm-10
+        .text-left
+          #{@stripe_customer.stripe_id}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Default Source:
+      .col-sm-10
+        .text-left
+          #{@stripe_customer.default_source}

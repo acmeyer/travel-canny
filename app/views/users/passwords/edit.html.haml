@@ -1,0 +1,12 @@
+.authform.card.mx-auto
+  .card-body
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+      %h2.text-center= t('views.auth.titles.change_password')
+      %hr
+      = devise_error_messages!
+      = f.hidden_field :reset_password_token
+      .form-group
+        = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('views.auth.new_password'), required: true
+      .form-group
+        = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: t('views.auth.confirm_new_password'), required: true
+      = f.submit t('views.auth.change_my_password'), :class => 'btn btn-primary btn-block', data: { disable_with: t('buttons.saving') }

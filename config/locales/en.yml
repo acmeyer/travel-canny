@@ -1,0 +1,95 @@
+en:
+  slogan: "Connecting the world"
+  activate_a_sim: "Activate a SIM"
+  get_a_sim: "Get a SIM"
+  link_expired: "Link expired"
+  invalid: "Invalid"
+  errors:
+    failed_to_add_data: "Failed to add data to account."
+    add_payment_and_data: "There was an issue adding your payment information. Please contact support@example.com. Error: %{error}."
+    messages:
+      blank: "can't be empty"
+  messages:
+    successfully_added_data: "Successfully added more data to your account!"
+  notices:
+    thanks_for_signing_up: "Thank you for signing up."
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "&hellip;"
+    registration:
+      add_shipping: "Where should we send your SIM?"
+      add_payment: "Add Payment Information"
+      add_payment_details: "We'll charge your card $10 for the initial shipment but this $10 will be credited to your account and can be used towards any Travel Canny purchase."
+      payment_confirmation_message: "You'll be able to confirm your payment information before your card is charged."
+      same_as_shipping: "Using shipping address for billing?"
+    auth:
+      titles:
+        sign_up: "Sign Up"
+        login: "Log In"
+        sign_in: "Sign In"
+        forgot_your_password: "Forgot your password?"
+        change_password: "Change your password"
+      new_password: "New Password"
+      confirm_new_password: "Confirm new password"
+      change_my_password: "Change my password"
+      reset_password: "Reset Password"
+      reset_password_instructions: "Provide your email and we'll send you password reset instructions."
+      remember_password: "Remember it again? Sign in"
+      forgot_password: "Forgot password?"
+      have_an_account: "Have an account? Sign in"
+      dont_have_an_account: "Don't have an account? Sign up"
+    activate:
+      activate_sim_card: "Activate SIM Card"
+      activate_sim: "Activate SIM"
+      activation_code: "Activation Code"
+      instructions: "Enter the activation code you received in the mail."
+      need_a_sim: "Need a SIM? Request one here."
+    add_payment:
+      card_will_be_charged_with_data: "Add your card to buy more data. Your card will be charged $10.00 and your account will be credited with 500MBs."
+  buttons:
+    buy_data: "Buy Data"
+    buying: "Buying..."
+    add: "Add"
+    adding: "Adding..."
+    saving: "Saving..."
+    signing_up: "Signing up..."
+    signing_in: "Signing in..."
+    sending: "Sending..."
+    logging_in: "Logging in..."
+    activating: "Activating..."
+    loading: "Loading..."
+    next: "Next"
+    confirm: "Confirm"
+    confirming: "Confirming..."
+  forms:
+    first_name: 'First Name'
+    last_name: 'Last Name'
+    email: 'Email'
+    password: 'Password'
+    confirm_password: 'Confirm Password'
+    street: 'Street'
+    street_2: 'Street 2'
+    city: 'City'
+    state: 'State'
+    postal_code: 'Zip'
+    card_number: "Card Number"
+    expiration_date: "Exp. Date (MM/YY)"
+    cvv: "CVV"
+  api:
+    auth:
+      email_not_found: "Couldn't find a user with that email."
+      invalid_email_or_password: "Invalid email or password."
+  titles:
+    buy_more_data: "Buy More Data"
+  sms:
+    notification:
+      data_warning_message_top_up: "You're Travel Canny data is running low, only %{amount_remaining}MBs remaining. Reply with 'ADD' to add another 500MBs of data to your account for $10.00."
+      data_warning_message_add_payment: "You're Travel Canny data is running low, only %{amount_remaining}MBs remaining. Buy more data here: %{add_payment_url}"
+      data_limit_exceeded_message_top_up: "You've used all of your Travel Canny data. Reply with 'ADD' to add another 500MBs of data to your account for $10.00. We'll send you a confirmation message when it's done."
+      data_limit_exceeded_message_add_payment: "You've used all of your Travel Canny data. Buy more data here: %{add_payment_url}"
+      response_not_recognized: "Sorry but your reply was not a recognized message. To add 500MBs of data to your plan for $10.00 reply with 'ADD'."
+

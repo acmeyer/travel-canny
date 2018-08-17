@@ -1,0 +1,20 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Users", admin_users_path
+  %li.breadcrumb-item
+    = link_to @user.id, admin_user_path(@user)
+  %li.breadcrumb-item.active New Data Plan
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 New Data Plan
+
+    %hr
+      = form_for [:admin, @user, @data_plan] do |f|
+        .row.justify-content-center
+          .col-sm-6
+            = render 'form_fields', f: f, data_plan: @data_plan
+            %hr
+            .actions
+              = f.submit 'Create', class: 'btn btn-primary btn-block', data: {disable_with: 'Creating...'}

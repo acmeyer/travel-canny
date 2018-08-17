@@ -1,0 +1,15 @@
+%nav.navbar.navbar-light.bg-white.border-bottom.navbar-expand
+  .container.justify-content-between
+    = link_to root_path, class: 'navbar-brand' do
+      Travel Canny
+    .navbar-nav.ml-auto
+      .nav-item.dropdown
+        = link_to "#", class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
+          Hi #{current_user.first_name}
+        .dropdown-menu.dropdown-menu-right
+          = link_to "My Account", account_settings_path, class: "dropdown-item"
+          - if current_user.admin?
+            = link_to "Admin Dashboard", admin_admin_root_path, class: "dropdown-item", target: '_blank'
+          .dropdown-divider
+          = link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+

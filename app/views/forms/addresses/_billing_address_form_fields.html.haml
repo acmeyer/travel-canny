@@ -1,0 +1,32 @@
+.form-group
+  .form-check
+    = check_box_tag :billing_same_as_shipping, 'yes', true, class: 'form-check-input'
+    = label_tag :billing_same_as_shipping, t('views.registration.same_as_shipping')
+#billing-address-fields
+  %hr
+  %p.lead Billing Address
+  .form-group
+    = text_field_tag :billing_street_1, params[:billing_street_1], class: 'form-control', placeholder: t('forms.street'), disabled: true
+  .form-group
+    = text_field_tag :billing_street_2, params[:billing_street_2], class: 'form-control', placeholder: t('forms.street_2'), disabled: true
+  .form-row
+    .col-md-6.form-group
+      = text_field_tag :billing_city, params[:billing_city], class: 'form-control', placeholder: t('forms.city'), disabled: true
+    .col-md-3.form-group
+      = select_tag :billing_state, options_for_select(us_states, params[:billing_state]), {class: 'form-control', include_blank: t('forms.state'), disabled: true}
+    .col-md-3.form-group
+      = text_field_tag :billing_postal_code, params[:billing_postal_code], class: 'form-control', placeholder: t('forms.postal_code'), disabled: true  
+
+- content_for :javascripts do
+  :javascript
+    $('#billing_same_as_shipping').on('change', function() {
+      if ($(this).is(":checked")) {
+        $('#billing-address-fields').hide();
+        $('#billing_street_1, #billing_city, #billing_state, #billing_postal_code').attr('required', false);
+        $('#billing_street_1, #billing_street_2, #billing_city, #billing_state, #billing_postal_code').prop('disabled', true);
+      } else {
+        $('#billing-address-fields').show();
+        $('#billing_street_1, #billing_city, #billing_state, #billing_postal_code').attr('required', true);
+        $('#billing_street_1, #billing_street_2, #billing_city, #billing_state, #billing_postal_code').prop('disabled', false);
+      }
+    });

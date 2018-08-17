@@ -1,0 +1,27 @@
+- if shipment.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(shipment.errors.count, "error")} prohibited this Shipment from being saved:"
+    %ul
+      - shipment.errors.full_messages.each do |message|
+        %li= message
+
+
+.form-group
+  = f.label :tracking_number, class: ''
+  = f.text_field :tracking_number, class: 'form-control'
+.form-group
+  = f.label :tracking_link, class: ''
+  = f.text_field :tracking_link, class: 'form-control'
+.form-group
+  = f.label :carrier, class: ''
+  = f.text_field :carrier, class: 'form-control'
+.form-group
+  = f.label :status, class: ''
+  = f.select :status, Shipment.statuses.map { |key, value| [key.humanize, key] }, {}, {class: 'form-control'}    
+.form-group
+  = f.label :sim_id, class: ''              
+  = f.collection_select(:sim_id, Sim.all, :id, :name, {include_blank: "Select"}, {class: 'form-control'})
+= f.fields_for :address do |ff|
+  = render 'admin/addresses/form_fields', f: ff, address: shipment.address
+  
+      

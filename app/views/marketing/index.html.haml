@@ -1,0 +1,10 @@
+.home.container.d-flex.flex-column.mx-auto.h-100.p-3
+  = render 'layouts/marketing/nav_bar'
+  .main
+    %h1.display-4.text-center.mb-3 Travel Canny
+    %p.lead.mb-3.text-center= t('slogan')
+    .row.justify-content-center
+      .col-sm-4.mt-3
+        = link_to t('get_a_sim'), 'https://google.com', target: '_blank', class: 'btn btn-lg btn-block btn-outline-secondary'
+  .mastfoot.mt-auto
+    = render 'shared/footer_links'

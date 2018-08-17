@@ -1,0 +1,18 @@
+- if data_plan.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(data_plan.errors.count, "error")} prohibited this Data plan from being saved:"
+    %ul
+      - data_plan.errors.full_messages.each do |message|
+        %li= message
+.form-group
+  = f.label :status, class: ''
+  = f.select :status, DataPlan.statuses.map { |key, value| [key.humanize, key] }, {}, {class: 'form-control'}
+.form-group
+  = f.label :total_amount, class: ''
+  = f.number_field :total_amount, class: 'form-control'
+.form-group
+  = f.label :total_amount_used, class: ''
+  = f.number_field :total_amount_used, class: 'form-control'
+.form-group
+  = f.label :warning_amount, class: ''
+  = f.number_field :warning_amount, class: 'form-control'

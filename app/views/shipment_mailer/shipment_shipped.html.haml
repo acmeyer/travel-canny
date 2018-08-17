@@ -1,0 +1,15 @@
+%p Hey #{ @user.first_name },
+
+%p Great news, a shipment is on it's way to you!
+
+%p
+  %strong Shipment Information
+  %br
+  Carrier: #{ @shipment.carrier }
+  %br
+  Tracking Number: #{ link_to @shipment.tracking_number, @shipment.tracking_link  }
+
+%p
+  Have a great trip!
+  %br
+  Alex @TravelCanny

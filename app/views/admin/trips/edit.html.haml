@@ -1,0 +1,22 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Users", admin_users_path
+  %li.breadcrumb-item
+    = link_to @user.id, admin_user_path(@user)
+  %li.breadcrumb-item.active Edit Trip
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 Editing Trip #{@trip.id}
+      .actions
+        = link_to 'Show', [:admin, @user], class: 'btn btn-light'
+
+    %hr
+    = form_for [:admin, @user, @trip] do |f|
+      .row.justify-content-center
+        .col-sm-6    
+          = render 'form_fields', f: f, trip: @trip
+          %hr
+          .actions
+            = f.submit 'Update', class: 'btn btn-primary btn-block', data: {disable_with: 'Updating...'}

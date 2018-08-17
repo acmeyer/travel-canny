@@ -1,0 +1,60 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Shipments", admin_shipments_path
+  %li.breadcrumb-item.active Shipment Details
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 Shipment Details
+      .actions
+        = link_to 'Edit', edit_admin_shipment_path(@shipment), class: 'btn btn-light'
+        = link_to 'Delete', admin_shipment_path(@shipment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong shipment id:
+      .col-sm-10
+        .text-left
+          #{@shipment.id}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Tracking Number:
+      .col-sm-10
+        .text-left
+          #{@shipment.tracking_number}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Tracking Link:
+      .col-sm-10
+        .text-left
+          = link_to @shipment.tracking_link, @shipment.tracking_link, target: "_blank"
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Carrier:
+      .col-sm-10
+        .text-left
+          #{@shipment.carrier}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Status:
+      .col-sm-10
+        .text-left
+          #{@shipment.status.humanize}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong SIM:
+      .col-sm-10
+        .text-left
+          = link_to admin_sim_path(@shipment.sim) do
+            = @shipment.sim.id
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Address
+      .col-sm-10
+        - if !@shipment.address.blank?
+          = @shipment.address.multi_line.join("\n")
+        - else
+          None
+            

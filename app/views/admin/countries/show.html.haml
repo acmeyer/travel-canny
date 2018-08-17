@@ -1,0 +1,43 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Countries", admin_countries_path
+  %li.breadcrumb-item.active Country
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 Country
+      .actions
+        = link_to 'Edit', edit_admin_country_path(@country), class: 'btn btn-light'
+        = link_to 'Delete', admin_country_path(@country), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Id:
+      .col-sm-10
+        .text-left
+          #{@country.id}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Name:
+      .col-sm-10
+        .text-left
+          #{@country.name}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Official Name:
+      .col-sm-10
+        .text-left
+          #{@country.official_name}  
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Alpha 2 Code:
+      .col-sm-10
+        .text-left
+          #{@country.alpha_2_code}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Alpha 3 Code:
+      .col-sm-10
+        .text-left
+          #{@country.alpha_3_code}

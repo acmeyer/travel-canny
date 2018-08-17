@@ -1,0 +1,40 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Users", admin_users_path
+  %li.breadcrumb-item
+    = link_to @user.id, admin_user_path(@user)
+  %li.breadcrumb-item.active Data Plan Details
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 Data Plan Details
+      .actions    
+        = link_to 'Edit', edit_admin_user_data_plan_path(@user, @data_plan), class: 'btn btn-light'
+        = link_to 'Delete', admin_user_data_plan_path(@user, @data_plan), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Id:
+      .col-sm-10
+        = @data_plan.id
+      .col-sm-2.text-sm-right
+        %strong Status:
+      .col-sm-10
+        #{@data_plan.status.humanize}            
+      .col-sm-2.text-sm-right
+        %strong Total Amount (mb):
+      .col-sm-10
+        #{@data_plan.total_amount_mb}
+      .col-sm-2.text-sm-right
+        %strong Total Amount Used (mb):
+      .col-sm-10
+        #{@data_plan.total_amount_used_mb}
+      .col-sm-2.text-sm-right
+        %strong Amount Remaining (mb):
+      .col-sm-10
+        #{@data_plan.amount_remaining_mb}           
+      .col-sm-2.text-sm-right
+        %strong Warning Amount (mb):
+      .col-sm-10
+        #{@data_plan.warning_amount_mb}   

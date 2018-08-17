@@ -1,0 +1,47 @@
+.row
+  .col-sm-6.mb-3
+    .card
+      .card-body
+        %h5.card-title.mb-0 Recent Users
+        %hr
+        .table-responsive
+          %table.table.table-hover
+            %thead
+              %tr
+                %td ID
+                %td Name
+                %td Email
+                %td
+            %tbody
+              - @recent_users.each do |user|
+                %tr
+                  %td= user.id
+                  %td= user.name
+                  %td= user.email
+                  %td= link_to "View", admin_user_path(user)
+      .card-footer
+        = link_to 'See All Users', admin_users_path, class: 'card-link'
+
+  .col-sm-6.mb-3
+    .card
+      .card-body
+        %h5.card-title.mb-0 Pending Shipments
+        %hr
+        - if @pending_shipments.empty?
+          None
+        - else
+          .table-responsive
+            %table.table.table-hover
+              %thead
+                %tr
+                  %td ID
+                  %td Tracking #
+                  %td
+              %tbody
+                - @pending_shipments.each do |shipment|
+                  %tr
+                    %td= shipment.id
+                    %td= shipment.tracking_number
+                    %td= link_to "View", admin_shipment_path(shipment)
+      .card-footer
+        = link_to 'See All Shipments', admin_shipments_path, class: 'card-link'            

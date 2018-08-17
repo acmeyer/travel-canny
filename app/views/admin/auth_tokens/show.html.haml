@@ -1,0 +1,39 @@
+%ol.breadcrumb
+  %li.breadcrumb-item
+    = link_to "Users", admin_users_path
+  %li.breadcrumb-item
+    = link_to @user.id, admin_user_path(@user)
+  %li.breadcrumb-item.active Auth Token Details
+
+.card
+  .card-body
+    .d-flex.justify-content-between
+      %h3 Auth Token Details
+      .actions    
+        = link_to 'Edit', edit_admin_user_auth_token_path(@user, @auth_token), class: 'btn btn-light'
+        = link_to 'Delete', admin_user_auth_token_path(@user, @auth_token), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Last Used:
+      .col-sm-10
+        .text-left
+          #{@auth_token.last_used_at}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong Expires:
+      .col-sm-10
+        .text-left
+          #{@auth_token.expires_at}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong IP Address:
+      .col-sm-10
+        .text-left
+          #{@auth_token.ip_address.to_s}
+    .row.mb-3
+      .col-sm-2.text-sm-right
+        %strong User Agent:
+      .col-sm-10
+        .text-left
+          #{@auth_token.user_agent}                   

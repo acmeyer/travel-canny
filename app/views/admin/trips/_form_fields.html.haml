@@ -1,0 +1,9 @@
+- if trip.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(trip.errors.count, "error")} prohibited this Trip from being saved:"
+    %ul
+      - trip.errors.full_messages.each do |message|
+        %li= message
+.form-group
+  = label_tag :countries, 'Select Countries'
+  = f.collection_select(:country_ids, Country.all, :id, :name, {}, {class: 'form-control', multiple: true})

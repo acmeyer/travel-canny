@@ -1,0 +1,23 @@
+- if user.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(user.errors.count, "error")} prohibited this user from being saved:"
+    %ul
+      - user.errors.full_messages.each do |message|
+        %li= message
+
+.form-group
+  = f.label :first_name, class: ''
+  = f.text_field :first_name, class: 'form-control'
+.form-group
+  = f.label :last_name, class: ''
+  = f.text_field :last_name, class: 'form-control'
+.form-group
+  = f.label :email, class: ''
+  = f.email_field :email, class: 'form-control'
+.form-group
+  = f.label :password, class: ''
+  = f.password_field :password, class: 'form-control'
+  %small.form-text.text-muted Leave empty if you do not want to change a user's password
+.form-check
+  = f.check_box :beta_user, class: 'form-check-input'
+  = f.label :beta_user, class: 'form-check-label'     

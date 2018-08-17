@@ -1,0 +1,30 @@
+.card
+  .d-flex.p-3.justify-content-between.border.border-top-0.border-right-0.border-left-0
+    %h3.card-title Users
+    .actions
+      = link_to 'Create User', new_admin_user_path, class: 'btn btn-primary'
+
+  .d-flex.justify-content-center.search.my-3
+    .col-md-6
+      = form_tag admin_users_path, method: :get do
+        = text_field_tag 'search_query', @search_query, class: 'form-control', placeholder: "Search..."
+
+  .table-responsive
+    %table.table.table-hover
+      %thead
+        %tr
+          %td ID
+          %td Name
+          %td Email
+          %td
+          %td
+      %tbody
+        - @users.each do |user|
+          %tr{"data-link" => url_for(action: 'show', id: user.id)}
+            %td.clickable= user.id
+            %td.clickable= user.name
+            %td.clickable= user.email
+            %td= link_to "Edit", edit_admin_user_path(user)
+            %td= link_to "Delete", admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger'
+
+  = paginate @users, window: 1

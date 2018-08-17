@@ -1,0 +1,225 @@
+// ---- CSS3 SASS MIXINS ----
+// https://github.com/madr/css3-sass-mixins
+//
+//  Copyright (C) 2011 by Anders Ytterström
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+
+
+//  Should IE filters be used or not?
+//  PROS: gradients, drop shadows etc will be handled by css.
+//  CONS: will harm the site performance badly,
+//        especially on sites with heavy rendering and scripting.
+$useIEFilters: 0; // might be 0 or 1. disabled by default.
+
+@mixin border-image ($path, $offsets, $repeats) {
+  -moz-border-image: $path $offsets $repeats;
+  -o-border-image: $path $offsets $repeats;
+  -webkit-border-image: $path $offsets $repeats;
+  border-image: $path $offsets $repeats;
+}
+
+@mixin border-radius ($values) {
+  -moz-border-radius: $values;
+  -webkit-border-radius: $values;
+  border-radius: $values;
+}
+
+@mixin border-top-right-radius ($values) {
+  -moz-border-radius-topright: $values;
+  -webkit-border-top-right-radius: $values;
+  border-top-right-radius: $values;
+}
+
+@mixin border-top-left-radius ($values) {
+  -moz-border-radius-topleft: $values;
+  -webkit-border-top-left-radius: $values;
+  border-top-left-radius: $values;
+}
+
+@mixin border-bottom-right-radius ($values) {
+  -moz-border-radius-bottomright: $values;
+  -webkit-border-bottom-right-radius: $values;
+  border-bottom-right-radius: $values;
+}
+
+@mixin border-bottom-left-radius ($values) {
+  -moz-border-radius-bottomleft: $values;
+  -webkit-border-bottom-left-radius: $values;
+  border-bottom-left-radius: $values;
+}
+
+@mixin border-top-radius ($values) {
+  -moz-border-radius-topright: $values;
+  -webkit-border-top-right-radius: $values;
+  border-top-right-radius: $values;
+  -moz-border-radius-topleft: $values;
+  -webkit-border-top-left-radius: $values;
+  border-top-left-radius: $values;
+}
+
+@mixin border-bottom-radius ($values) {
+  -moz-border-radius-bottomright: $values;
+  -webkit-border-bottom-right-radius: $values;
+  border-bottom-right-radius: $values;
+  -moz-border-radius-bottomleft: $values;
+  -webkit-border-bottom-left-radius: $values;
+  border-bottom-left-radius: $values;
+}
+
+@mixin box-sizing($value) {
+  -moz-box-sizing: $value;
+  -webkit-box-sizing: $value;
+  -o-box-sizing: $value;
+  box-sizing: $value;
+}
+
+@mixin calc($attr, $value) {
+  $attr: -moz-calc($value);
+  $attr: -webkit-calc($value);
+  $attr: -o-calc($value);
+  $attr: calc($value);
+}
+
+@mixin box-shadow ($x, $y, $offset, $hex, $ie: $useIEFilters) {
+  box-shadow: $x $y $offset $hex;
+  -moz-box-shadow: $x $y $offset $hex;
+  -webkit-box-shadow: $x $y $offset $hex;
+
+  @if $ie == 1 {
+    $iecolor: '#' + red($hex) + green($hex) + blue($hex);
+    filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=#{$x}, OffY=#{$y}, Color='#{$iecolor}');
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.dropshadow(OffX=#{$x}, OffY=#{$y}, Color='#{$iecolor}'));
+  }
+}
+
+@mixin linear-gradient($from, $to, $ie: $useIEFilters) {
+  @if $ie != 1 {
+    background-color: $to;
+  }
+
+  background-image: -moz-linear-gradient($from, $to);
+  background-image: -o-linear-gradient($from, $to);
+  background-image: -ms-linear-gradient($from, $to);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(1, $to));
+  background-image: -webkit-linear-gradient($from, $to);
+
+  @if $ie == 1 {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
+  }
+}
+
+@mixin vertical-gradient($from, $to, $ie: $useIEFilters) {
+  background-color: mix($from, $to, 60%);
+  background-image: -moz-linear-gradient(top, $from, $to); // FF 3.6+
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($from), to($to)); // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(top, $from, $to); // Safari 5.1+, Chrome 10+
+  background-image: -o-linear-gradient(top, $from, $to); // Opera 11.10
+  background-image: linear-gradient(to bottom, $from, $to); // Standard, IE10
+  background-repeat: repeat-x;
+
+  @if $ie == 1 {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}', GradientType=0);
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}', GradientType=0));
+  }
+}
+
+@mixin rgba($hex, $alpha, $ie: $useIEFilters) {
+  @if $ie == 1 {
+    // this formula is not accurate enough, will be fixed with sass 3.1
+    $hexopac: '#' + ceil((($alpha * 255)/16) *10) + $hex;
+    background-color: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$hexopac}',EndColorStr='#{$hexopac}}');
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$hexopac}',EndColorStr='#{$hexopac}'));
+  }
+  @else {
+    background-color: $hex;
+    background-color: rgba(red($hex), green($hex), blue($hex), $alpha);
+  }
+}
+
+@mixin rotate ($deg, $ie: $useIEFilters) {
+  -moz-transform: rotate(#{$deg}deg);
+  -o-transform: rotate(#{$deg}deg);
+  -ms-transform: rotate(#{$deg}deg);
+  -webkit-transform: rotate(#{$deg}deg);
+
+  @if $ie == 1 {
+      filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($deg)}, M12=-#{sin($deg)}, M21=#{sin($deg)}, M22=#{cos($deg)});
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($deg)}, M12=-#{sin($deg)}, M21=#{sin($deg)}, M22=#{cos($deg)})";
+        zoom: 1;
+  }
+}
+
+@mixin scale ($size) {
+  -moz-transform: scale(#{$size});
+  -o-transform: scale(#{$size});
+  -ms-transform: scale(#{$size});
+  -webkit-transform: scale(#{$size});
+}
+
+@mixin transition ($value) {
+  -moz-transition: $value;
+  -o-transition: $value;
+  -ms-transition: $value;
+  -webkit-transition: $value;
+  transition: $value;
+}
+
+@mixin opacity ($value) {
+  -moz-opacity: $value;
+  -khtml-opacity: $value;
+  opacity: $value;
+  filter: alpha(opacity=$value * 10);
+}
+
+// Add a drop shadow and border on mouseover
+@mixin hover-shadow() {
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.22);
+  }
+}
+.hover-shadow { @include hover-shadow() }
+
+@mixin default-border() {
+  border-radius: 3px;
+  border: 1px solid $border-gray;
+}
+
+// ==== /CSS3 SASS MIXINS ====
+/*
+  This mixin can be used to set the object-fit:
+  @include object-fit(contain);
+  or object-fit and object-position:
+  @include object-fit(cover, top);
+*/
+@mixin object-fit($fit: fill, $position: null){
+  -o-object-fit: $fit;
+     object-fit: $fit;
+  @if $position {
+	  -o-object-position: $position;
+	     object-position: $position;
+  	font-family: 'object-fit: #{$fit}; object-position: #{$position}';
+  } @else {
+  	font-family: 'object-fit: #{$fit}';
+  }
+}
